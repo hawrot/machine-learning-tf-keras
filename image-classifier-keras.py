@@ -16,7 +16,7 @@ fashion_mnist = keras.datasets.fashion_mnist
 
 # Prepare the validation set
 X_valid, X_train = X_train_full[:5000] / 255.0, X_train_full[5000:] / 255.0 # Divided by 255 to scale the pixels for Gradient Descent
-y_valid, y_train = y_train_full[:5000] / 255.0, y_train_full[5000:]
+y_valid, y_train = y_train_full[:5000], y_train_full[5000:]
 
 # Set the classes
 class_names = ['T-shirt/top', 'Trousers', 'Pullover', 'Dress', 'Coat', 'Sandals', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
@@ -42,7 +42,7 @@ optimizer = keras.optimizers.SGD(lr=0.2)
 model.compile(loss='sparse_categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
 # Fit the model
-history = model.fit(X_train, y_train, epochs = 10, validation_data=(X_valid, y_valid))
+history = model.fit(X_train, y_train, epochs = 50, validation_data=(X_valid, y_valid))
 
 # Plot the data
 
@@ -50,3 +50,6 @@ pd.DataFrame(history.history).plot(figsize=(8,5))
 plt.grid(True)
 plt.gca().set_ylim(0,1) # set the vertical range to [0,1]
 plt.show()
+
+# Evaluate the model
+model.evaluate(X_test, y_test)
