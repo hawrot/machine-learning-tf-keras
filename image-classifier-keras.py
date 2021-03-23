@@ -28,3 +28,9 @@ model.add(keras.layers.Dense(10, activation='softmax')) # 10 neurons - one per c
 
 # Summary the model
 model.summary()
+print(model.layers)
+
+# Get the weights and biases
+weights, biases = model.layers[1].get_weights()
+#print(weights)
+#print(biases)
