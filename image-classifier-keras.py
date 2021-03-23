@@ -19,7 +19,7 @@ X_valid, X_train = X_train_full[:5000] / 255.0, X_train_full[5000:] / 255.0 # Di
 y_valid, y_train = y_train_full[:5000], y_train_full[5000:]
 
 # Set the classes
-class_names = ['T-shirt/top', 'Trousers', 'Pullover', 'Dress', 'Coat', 'Sandals', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
 # Build the model
 model = keras.models.Sequential()
@@ -38,11 +38,11 @@ weights, biases = model.layers[1].get_weights()
 #print(biases)
 
 # Compile the model
-optimizer = keras.optimizers.SGD(lr=0.2)
+optimizer = keras.optimizers.SGD(lr=0.1)
 model.compile(loss='sparse_categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
 # Fit the model
-history = model.fit(X_train, y_train, epochs = 50, validation_data=(X_valid, y_valid))
+history = model.fit(X_train, y_train, epochs = 30, validation_data=(X_valid, y_valid))
 
 # Plot the data
 
