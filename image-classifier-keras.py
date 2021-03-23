@@ -27,4 +27,4 @@ model.add(keras.layers.Dense(100, activation="relu")) # 300 neurons | Dense laye
 model.add(keras.layers.Dense(10, activation='softmax')) # 10 neurons - one per class | softmax
 
 # Summary the model
-print(model.summary())
+model.summary()
