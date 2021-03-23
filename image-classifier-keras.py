@@ -34,3 +34,8 @@ print(model.layers)
 weights, biases = model.layers[1].get_weights()
 #print(weights)
 #print(biases)
+
+# Compile the model
+model.compile(loss='sparse_categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
+
+# Fit the model
