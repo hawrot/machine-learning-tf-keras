@@ -38,7 +38,8 @@ weights, biases = model.layers[1].get_weights()
 #print(biases)
 
 # Compile the model
-model.compile(loss='sparse_categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
+optimizer = keras.optimizers.SGD(lr=0.2)
+model.compile(loss='sparse_categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
 # Fit the model
 history = model.fit(X_train, y_train, epochs = 10, validation_data=(X_valid, y_valid))
