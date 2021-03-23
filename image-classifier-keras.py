@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow import keras
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 print(tf.__version__)
 print(keras.__version__)
@@ -53,3 +54,16 @@ plt.show()
 
 # Evaluate the model
 model.evaluate(X_test, y_test)
+
+# Predict
+
+X_new = X_test[:3]
+y_proba = model.predict(X_new)
+y_proba.round(2)
+
+y_pred = model.predict_classes(X_new)
+print(y_pred)
+print(np.array(class_names)[y_pred])
+
+y_new = y_test[:3]
+print(y_new)
