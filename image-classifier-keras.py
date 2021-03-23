@@ -9,6 +9,9 @@ fashion_mnist = keras.datasets.fashion_mnist
 
 (X_train_full, y_train_full), (X_test, y_test) = fashion_mnist.load_data()
 
-# Shape of X_train
+# Shape check
 print(X_train_full.shape)
+
+# Type
+print(X_train_full.dtype)
 
