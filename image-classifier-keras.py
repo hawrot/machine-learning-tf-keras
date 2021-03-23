@@ -24,3 +24,13 @@ y_valid, y_train = y_train_full[:5000] / 255.0, y_train_full[5000:] / 255.0
 
 class_names = ['T-shirt/top', 'Trousers', 'Pullover', 'Dress', 'Coat', 'Sandals', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
+# Build the model
+
+model = keras.models.Sequential()
+model.add(keras.layers.Flatten(input_shape=[28,28])) # Convert each input image into 1D array
+model.add(keras.layers.Dense(300, activation="relu")) # 300 neurons | Dense layers manage weight matrix by its own
+model.add(keras.layers.Dense(100, activation="relu")) # 300 neurons | Dense layers manage weight matrix by its own
+model.add(keras.layers.Dense(10, activation='softmax')) # 10 neurons - one per class | softmax
+
+# Summary the model
+print(model.summary())
