@@ -3,20 +3,24 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from tensorflow import keras
 
-housing = fetch_california_housing() # Fetch the data
+# Import dataset
+fashion_mnist = keras.datasets.fashion_mnist
 
-# Split the data
-X_train_full, X_test, y_train_full, y_test = train_test_split(housing.data, housing.target)
-X_train, X_valid, y_train, y_valid = train_test_split(X_train_full, y_train_full)
+(X_train_full, y_train_full), (X_test, y_test) = fashion_mnist.load_data()
 
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train)
-X_valid = scaler.transform(X_valid)
-X_test = scaler.transform(X_test)
+#print(X_train_full.shape) # Shape check
+#print(X_train_full.dtype) # Type chek
+
+# Prepare the validation set
+X_valid, X_train = X_train_full[:5000] / 255.0, X_train_full[5000:] / 255.0 # Divided by 255 to scale the pixels for Gradient Descent
+y_valid, y_train = y_train_full[:5000], y_train_full[5000:]
+
+# Set the classes
+class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
 
 # Network
-opt = keras.optimizers.Adam(learning_rate=0.01)
+opt = keras.optimizers.SGD(learning_rate=0.01)
 
 model = keras.models.Sequential([
     keras.layers.Flatten(input_shape=[28,28]),
@@ -26,13 +30,14 @@ model = keras.models.Sequential([
     keras.layers.Dense(10, activation="softmax"),
 ])
 
-
+# Summarise the model
+model.summary()
 
 # Compile the model
-model.compile(loss="mean_squared_error", optimizer=opt)
+model.compile(loss='sparse_categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
 
 # Fit the model
-history = model.fit(X_train, y_train, epochs=50, validation_data=(X_valid, y_valid))
+history = model.fit(X_train, y_train, epochs=30, validation_data=(X_valid, y_valid))
 
 # Save the model
 model.save("non-sequential-regression-model.h5")
