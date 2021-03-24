@@ -23,7 +23,7 @@ model.add(keras.layers.Dense(300, activation="relu")) # 300 neurons | Dense laye
 model.add(keras.layers.Dense(100, activation="relu")) # 300 neurons | Dense layers manage weight matrix on its own
 model.add(keras.layers.Dense(10, activation='softmax')) # 10 neurons - one per class | softmax
 
-# Summary the model
+# Summarise the model
 model.summary()
 print(model.layers)
 
@@ -38,14 +38,12 @@ checkpoint_cb = keras.callbacks.ModelCheckpoint("checkpoint-keras-model.h5", sav
 history = model.fit(X_train, y_train, epochs = 50, validation_data=(X_valid, y_valid), callbacks=[checkpoint_cb])
 
 # Load the saved model
-
 loadedModel = keras.models.load_model("checkpoint-keras-model.h5") #roll back to best model
 
 # Evaluate the model
 loadedModel.evaluate(X_test, y_test)
 
 # Predict
-
 X_new = X_test[:3]
 y_proba = loadedModel.predict(X_new)
 y_proba.round(2)
