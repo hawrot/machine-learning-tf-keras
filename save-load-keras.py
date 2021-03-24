@@ -4,16 +4,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-print(tf.__version__)
-print(keras.__version__)
-
 # Import dataset
 fashion_mnist = keras.datasets.fashion_mnist
 
 (X_train_full, y_train_full), (X_test, y_test) = fashion_mnist.load_data()
-
-#print(X_train_full.shape) # Shape check
-#print(X_train_full.dtype) # Type chek
 
 # Prepare the validation set
 X_valid, X_train = X_train_full[:5000] / 255.0, X_train_full[5000:] / 255.0 # Divided by 255 to scale the pixels for Gradient Descent
@@ -33,11 +27,6 @@ model.add(keras.layers.Dense(10, activation='softmax')) # 10 neurons - one per c
 model.summary()
 print(model.layers)
 
-# Get the weights and biases
-weights, biases = model.layers[1].get_weights()
-#print(weights)
-#print(biases)
-
 # Compile the model
 optimizer = keras.optimizers.SGD(lr=0.2)
 model.compile(loss='sparse_categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
@@ -51,7 +40,6 @@ history = model.fit(X_train, y_train, epochs = 50, validation_data=(X_valid, y_v
 # Load the saved model
 
 loadedModel = keras.models.load_model("checkpoint-keras-model.h5") #roll back to best model
-
 
 # Evaluate the model
 loadedModel.evaluate(X_test, y_test)
