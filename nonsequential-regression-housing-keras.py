@@ -28,7 +28,11 @@ model = keras.Model(inputs=[input_], outputs=[output])
 # Compile the model
 model.compile(loss="mean_squared_error", optimizer=opt)
 
+# Fit the model
 history = model.fit(X_train, y_train, epochs=50, validation_data=(X_valid, y_valid))
+
+# Save the model
+model.save("non-sequential-regression-model.h5")
 
 mse_test = model.evaluate(X_test, y_test)
 
