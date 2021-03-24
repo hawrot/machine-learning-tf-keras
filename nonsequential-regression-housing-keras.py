@@ -15,3 +15,19 @@ X_valid = scaler.transform(X_valid)
 X_test = scaler.transform(X_test)
 
 
+# Network
+input_ = keras.layers.Input(shape=X_train.shape[1:])
+hidden1 = keras.layers.Dense(30, activation="relu")(input_)
+hidden2 = keras.layers.Dense(30, activation="relu")(hidden1)
+concat = keras.layers.Concatenate()([input_, hidden2])
+output = keras.layers.Dense(1)(concat)
+model = keras.Model(inputs=[input_], outputs=[output])
+
+# Compile the model
+model.compile(loss="mean_squared_error", optimizer="sgd")
+
+history = model.fit(X_train, y_train, epochs=20, validation_data=(X_valid, y_valid))
+
+mse_test = model.evaluate(X_test, y_test)
+X_new = X_test[:3]
+y_pred = model.predict(X_new)
