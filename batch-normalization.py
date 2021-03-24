@@ -18,6 +18,14 @@ X_test = scaler.transform(X_test)
 # Network
 opt = keras.optimizers.Adam(learning_rate=0.01)
 
+model = keras.models.Sequential([
+    keras.layers.Flatten(input_shape=[28,28]),
+    keras.layers.BatchNormalization(),
+    keras.layers.Dense(300, activation="elu", kernel_initializer="he_normal"),
+    keras.layers.Dense(100, activation="elu", kernel_initializer="he_normal"),
+    keras.layers.Dense(10, activation="softmax"),
+])
+
 
 
 # Compile the model
