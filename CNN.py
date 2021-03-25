@@ -1,6 +1,6 @@
 import numpy as np
 import tensorflow as tf
-import tensorflow.keras as keras
+
 from sklearn.datasets import load_sample_image
 import matplotlib.pyplot as plt
 
@@ -19,9 +19,9 @@ filters[:, 3, :, 0] = 1 # vertical line
 filters[3, :, :, 1] = 1 # horizontal line
 
 # Outputs
-outputs = tf.nn.conv2d(images, filters, strides=1, padding="SAME")
-
+outputs = tf.nn.conv2d(images, filters, strides=1, padding="SAME") # Implementation without pooling layer
+outputs2 = tf.nn.max_pool(images, ksize=(1,1,1,1), strides=(1,1,1,1), padding="VALID") # Implementation with pooling layer
 
 # Plot
-plt.imshow(outputs[0, :, :, 1], cmap="gray") # plot 1st images's 2nd feature map
+plt.imshow(outputs2[0, :, :, 1], cmap="gray") # plot 1st images's 2nd feature map
 plt.show()
