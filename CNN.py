@@ -1,6 +1,8 @@
 import numpy as np
 import tensorflow as tf
+import tensorflow.keras as keras
 from sklearn.datasets import load_sample_image
+import matplotlib.pyplot as plt
 
 # Load sample images
 china = load_sample_image("china.jpg") / 255
@@ -17,4 +19,9 @@ filters[:, 3, :, 0] = 1 # vertical line
 filters[3, :, :, 1] = 1 # horizontal line
 
 # Outputs
-outputs = tf.nn.conv2d(images, filters, strides=1, padding="same")
+outputs = tf.nn.conv2d(images, filters, strides=1, padding="SAME")
+#conv = keras.layers.Conv2D(filters=32, kernel_size=3, strides=1, padding="", activation="relu")
+
+# Plot
+plt.imshow(outputs[0, :, :, 1], cmap="gray") # plot 1st images's 2nd feature map
+plt.show()
