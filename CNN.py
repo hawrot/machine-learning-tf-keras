@@ -20,7 +20,7 @@ filters[3, :, :, 1] = 1 # horizontal line
 
 # Outputs
 outputs = tf.nn.conv2d(images, filters, strides=1, padding="SAME")
-#conv = keras.layers.Conv2D(filters=32, kernel_size=3, strides=1, padding="", activation="relu")
+
 
 # Plot
 plt.imshow(outputs[0, :, :, 1], cmap="gray") # plot 1st images's 2nd feature map
