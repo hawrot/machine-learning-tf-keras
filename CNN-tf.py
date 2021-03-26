@@ -19,5 +19,5 @@ for i in range(25):
     plt.yticks([])
     plt.grid(False)
     plt.imshow(train_images[i], cmap=plt.cm.binary)
-    plt.xlable(class_names[train_labels[i][0]])
+    plt.xlabel(class_names[train_labels[i][0]])
 plt.show()
