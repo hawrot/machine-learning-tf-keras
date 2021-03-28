@@ -19,4 +19,16 @@ class Net(nn.Module):
         self.fc2 = nn.Linear(120, 84)
         self.fc3 = nn.Linear(84, 10)
 
+    def forward(self, x):
+        # max pooling (2, 2)
+        x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
+
+        # Single number if the size is square
+        x = F.max_pool2d(F.relu(self.conv1(x)), 2)
+        x = x.view(-1, self.num_flat_features(x))
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        return x
+
 
